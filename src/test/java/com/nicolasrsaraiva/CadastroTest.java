@@ -3,10 +3,13 @@ package com.nicolasrsaraiva;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.assertTrue;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CadastroTest {
     @Test
     public void cadastrarUsuarioComSucesso() {
@@ -25,14 +28,28 @@ public class CadastroTest {
         botaoCadastrar.click();
 
         MobileElement botaoLogar = (MobileElement) driver.findElementById("br.com.alura.aluraesporte:id/login_botao_logar");
-
         assertTrue(botaoLogar.isDisplayed());
     }
 
-    public void cadastrarUsuarioExistente() {
-        AppiumDriver appiumDriver = AppiumDriverConfig.getInstance().driver;
-    }
+    @Test
+    public void realizarLoginComUsuarioCadastrado(){
+        AppiumDriver driver = AppiumDriverConfig.getInstance().driver;
 
+        MobileElement campoIdDoUsuario = (MobileElement) driver.findElementById("br.com.alura.aluraesporte:id/input_usuario");
+        MobileElement campoSenha = (MobileElement) driver.findElementById("br.com.alura.aluraesporte:id/input_senha");
+        MobileElement botaoLogar = (MobileElement) driver.findElementById("br.com.alura.aluraesporte:id/login_botao_logar");
+
+        campoIdDoUsuario.sendKeys("nicolas");
+        campoSenha.sendKeys("123");
+        botaoLogar.click();
+
+        MobileElement actionBard = (MobileElement) driver.findElementById("br.com.alura.aluraesporte:id/action_bar");
+        Assert.assertTrue(actionBard.isDisplayed());
+
+        MobileElement botaoDeslogar = (MobileElement) driver.findElementById("br.com.alura.aluraesporte:id/menu_principal_deslogar") ;
+
+        botaoDeslogar.click();
+    }
     @Test
     public void naoCadastrarUsuarioComSenhasDiferentes() {
         AppiumDriver driver = AppiumDriverConfig.getInstance().driver;
