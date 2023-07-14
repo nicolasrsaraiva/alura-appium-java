@@ -20,8 +20,7 @@ public class AppiumDriverConfig {
         return AppiumDriverConfig.instance;
     }
     private AppiumDriverConfig()  {
-        File apk = new File("C:\\Users\\nicol\\study\\appium\\alura-appium-java\\src\\main\\resources\\alura_esporte.apk");
-        //File apk = new File("src/main/resources/alura_esporte.apk");
+        File apk = new File("src/main/resources/alura_esporte.apk");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.APP, apk.getAbsolutePath());
@@ -35,6 +34,5 @@ public class AppiumDriverConfig {
             throw new RuntimeException(e);
         }
         driver = new AppiumDriver<>(urlConn, capabilities);
-
     }
 }
