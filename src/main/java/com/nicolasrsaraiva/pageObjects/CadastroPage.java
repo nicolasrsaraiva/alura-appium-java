@@ -46,33 +46,26 @@ public class CadastroPage {
     @AndroidFindBy(id = "br.com.alura.aluraesporte:id/erro_cadastro")
     private MobileElement mensagemErroCadastro;
 
-    public void inserirValorCampoNome(String nome){
+    public void cadastrarUsuarioComSucesso(String nome, String senha){
         esperarElemento(campoNome);
-        campoNome.clear();
         campoNome.sendKeys(nome);
-    }
-
-    public void inserirValorCampoIdUsuario(String usuario){
-        esperarElemento(campoIdDoUsuario);
-        campoIdDoUsuario.clear();
-        campoIdDoUsuario.sendKeys(usuario);
-    }
-
-    public void inserirValorCampoSenha(String senha){
         esperarElemento(campoSenha);
-        campoSenha.clear();
         campoSenha.sendKeys(senha);
-    }
-
-    public void inserirValorCampoConfirmarSenha(String senha){
         esperarElemento(campoConfirmarSenha);
-        campoConfirmarSenha.clear();
         campoConfirmarSenha.sendKeys(senha);
+        esperarElemento(botaoCadastrar);
+        botaoCadastrar.click();
     }
 
-    public void clicarBotaoLogar(){
-        esperarElemento(botaoLogar);
-        botaoLogar.click();
+    public void naoCadastrarUsuarioComSenhasDiferentes(String nome, String senha, String senhaErrada) {
+        esperarElemento(campoNome);
+        campoNome.sendKeys(nome);
+        esperarElemento(campoSenha);
+        campoSenha.sendKeys(senha);
+        esperarElemento(campoConfirmarSenha);
+        campoConfirmarSenha.sendKeys(senhaErrada);
+        esperarElemento(botaoCadastrar);
+        botaoCadastrar.click();
     }
 
     public void clicarBotaoLoginCadastrarUsuario(){
@@ -80,24 +73,9 @@ public class CadastroPage {
         botaoLoginCadastrarUsuario.click();
     }
 
-    public void clicarBotaoCadastrar() {
-        esperarElemento(botaoCadastrar);
-        botaoCadastrar.click();
-    }
-
-    public void clicarBotaoDeslogar(){
-        esperarElemento(botaoDeslogar);
-        botaoDeslogar.click();
-    }
-
     public boolean verificarExistenciaBotaoLogar(){
         esperarElemento(botaoLogar);
         return botaoLogar.isDisplayed();
-    }
-
-    public boolean verificarExistenciaActionBar(){
-        esperarElemento(actionBar);
-        return actionBar.isDisplayed();
     }
 
     public String obterMensagemErroCadastro(){
@@ -109,5 +87,4 @@ public class CadastroPage {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-
 }

@@ -1,5 +1,6 @@
-package com.nicolasrsaraiva;
+package com.nicolasrsaraiva.tests;
 
+import com.nicolasrsaraiva.AppiumDriverConfig;
 import com.nicolasrsaraiva.pageObjects.CadastroPage;
 import io.appium.java_client.AppiumDriver;
 import org.junit.Assert;
@@ -18,10 +19,8 @@ public class CadastroTest {
         CadastroPage cadastroPage = new CadastroPage(driver);
 
         cadastroPage.clicarBotaoLoginCadastrarUsuario();
-        cadastroPage.inserirValorCampoNome("nicolas");
-        cadastroPage.inserirValorCampoSenha("123");
-        cadastroPage.inserirValorCampoConfirmarSenha("123");
-        cadastroPage.clicarBotaoCadastrar();
+        cadastroPage.cadastrarUsuarioComSucesso("nicolas", "123");
+
         assertTrue(cadastroPage.verificarExistenciaBotaoLogar());
     }
 
@@ -31,26 +30,9 @@ public class CadastroTest {
         CadastroPage cadastroPage = new CadastroPage(driver);
 
         cadastroPage.clicarBotaoLoginCadastrarUsuario();
-        cadastroPage.inserirValorCampoNome("saraiva");
-        cadastroPage.inserirValorCampoSenha("123");
-        cadastroPage.inserirValorCampoConfirmarSenha("321");
-        cadastroPage.clicarBotaoCadastrar();
+        cadastroPage.naoCadastrarUsuarioComSenhasDiferentes("nicolas", "123", "321");
 
         Assert.assertEquals("Senhas não conferem", cadastroPage.obterMensagemErroCadastro());
         driver.navigate().back();
     }
-
-    @Test
-    public void realizarLoginComUsuarioCadastrado(){
-        AppiumDriver driver = AppiumDriverConfig.getInstance().driver;
-
-        CadastroPage cadastroPage = new CadastroPage(driver);
-
-        cadastroPage.inserirValorCampoIdUsuario("nicolas");
-        cadastroPage.inserirValorCampoSenha("123");
-        cadastroPage.clicarBotaoLogar();
-        cadastroPage.verificarExistenciaActionBar();
-        cadastroPage.clicarBotaoDeslogar();
-    }
-
 }
