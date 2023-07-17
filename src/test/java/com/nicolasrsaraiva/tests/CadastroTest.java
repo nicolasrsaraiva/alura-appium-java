@@ -12,9 +12,12 @@ import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CadastroTest {
+
+    AppiumDriver driver;
+
     @Test
     public void cadastrarUsuarioComSucesso() {
-        AppiumDriver driver = AppiumDriverConfig.getInstance().driver;
+        driver = AppiumDriverConfig.getInstance().driver;
 
         CadastroPage cadastroPage = new CadastroPage(driver);
 
@@ -26,7 +29,7 @@ public class CadastroTest {
 
     @Test
     public void naoCadastrarUsuarioComSenhasDiferentes() {
-        AppiumDriver driver = AppiumDriverConfig.getInstance().driver;
+        driver = AppiumDriverConfig.getInstance().driver;
         CadastroPage cadastroPage = new CadastroPage(driver);
 
         cadastroPage.clicarBotaoLoginCadastrarUsuario();

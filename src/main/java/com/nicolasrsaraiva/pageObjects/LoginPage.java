@@ -64,7 +64,7 @@ public class LoginPage {
     }
 
     public void esperarElemento(MobileElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 }

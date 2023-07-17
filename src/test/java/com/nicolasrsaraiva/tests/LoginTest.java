@@ -9,10 +9,11 @@ import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoginTest {
+    AppiumDriver driver;
 
     @Test
     public void realizarLoginComUsuarioCadastrado(){
-        AppiumDriver driver = AppiumDriverConfig.getInstance().driver;
+        driver = AppiumDriverConfig.getInstance().driver;
 
         LoginPage loginPage = new LoginPage(driver);
 
@@ -25,7 +26,7 @@ public class LoginTest {
 
     @Test
     public void naoRealizarLoginComUsarioSemCadastro(){
-        AppiumDriver driver = AppiumDriverConfig.getInstance().driver;
+        driver = AppiumDriverConfig.getInstance().driver;
 
         LoginPage loginPage = new LoginPage(driver);
 
